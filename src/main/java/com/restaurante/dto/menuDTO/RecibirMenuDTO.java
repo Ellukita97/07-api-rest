@@ -11,4 +11,8 @@ public class RecibirMenuDTO {
 
     public RecibirMenuDTO() {
     }
+
+    public RecibirMenuDTO(String nombre) {
+        this.nombre = nombre;
+    }
 }

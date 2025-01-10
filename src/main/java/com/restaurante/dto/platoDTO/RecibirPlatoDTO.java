@@ -14,4 +14,9 @@ public class RecibirPlatoDTO {
     public RecibirPlatoDTO() {
     }
 
+    public RecibirPlatoDTO(String nombre, Long idMenu, Double precio) {
+        this.nombre = nombre;
+        this.idMenu = idMenu;
+        this.precio = precio;
+    }
 }

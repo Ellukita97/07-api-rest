@@ -2,13 +2,12 @@ package com.restaurante.services;
 
 import com.restaurante.constantes.TipoCliente;
 import com.restaurante.dto.pedidosDTO.ResponderPedidosDTO;
-import com.restaurante.dto.platoDTO.ResponderPlatoDTO;
 import com.restaurante.models.Cliente;
 import com.restaurante.models.Pedido;
 import com.restaurante.repositories.ClienteRepositorio;
 import com.restaurante.repositories.PedidoRepositorio;
 import com.restaurante.repositories.PlatoRepositorio;
-import com.restaurante.utils.strategy.PrecioEstrategia;
+import com.restaurante.patronesDeDisenio.strategy.PrecioEstrategia;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

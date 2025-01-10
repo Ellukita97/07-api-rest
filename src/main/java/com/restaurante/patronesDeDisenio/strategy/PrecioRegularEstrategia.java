@@ -1,4 +1,4 @@
-package com.restaurante.utils.strategy;
+package com.restaurante.patronesDeDisenio.strategy;
 
 import com.restaurante.models.Plato;
 import org.springframework.stereotype.Component;

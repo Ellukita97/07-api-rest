@@ -1,4 +1,4 @@
-package com.restaurante.utils.chainofresponsibility.Cliente;
+package com.restaurante.patronesDeDisenio.chainofresponsibility.Cliente;
 
 import com.restaurante.constantes.TipoCliente;
 import com.restaurante.models.Cliente;

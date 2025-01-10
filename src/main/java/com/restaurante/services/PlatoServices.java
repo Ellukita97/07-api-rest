@@ -20,9 +20,9 @@ public class PlatoServices {
         this.repositorio = repositorio;
     }
 
-    public void agregarPlato(Plato plato) {
+    public Plato agregarPlato(Plato plato) {
         plato.setTipoPlato(TipoPlato.COMUN);
-        repositorio.save(plato);
+        return repositorio.save(plato);
     }
 
     public Optional<Plato> obtenerPlato(Long id) {

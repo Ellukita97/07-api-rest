@@ -12,4 +12,9 @@ public class RecibirPedidosDTO {
 
     public RecibirPedidosDTO() {
     }
+
+    public RecibirPedidosDTO(Double precio, Long idCliente) {
+        this.precio = precio;
+        this.idCliente = idCliente;
+    }
 }

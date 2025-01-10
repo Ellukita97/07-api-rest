@@ -3,7 +3,7 @@ package com.restaurante.services;
 import com.restaurante.constantes.TipoCliente;
 import com.restaurante.models.Cliente;
 import com.restaurante.repositories.ClienteRepositorio;
-import com.restaurante.utils.Observer.Observer;
+import com.restaurante.patronesDeDisenio.Observer.Observer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

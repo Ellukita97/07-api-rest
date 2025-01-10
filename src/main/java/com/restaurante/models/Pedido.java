@@ -36,4 +36,12 @@ public class Pedido {
     )
     private List<Plato> platos = new ArrayList<>();
 
+    public Pedido() {
+    }
+
+    public Pedido(Long id, Double precio, Cliente cliente) {
+        this.id = id;
+        this.precio = precio;
+        this.cliente = cliente;
+    }
 }

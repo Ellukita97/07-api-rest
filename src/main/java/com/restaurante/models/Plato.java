@@ -30,4 +30,14 @@ public class Plato {
     @JoinColumn(name = "menu_id")
     private Menu menu;
 
+    public Plato() {
+    }
+
+    public Plato(Long id, String nombre, Double precio, TipoPlato tipoPlato, Menu menu) {
+        this.id = id;
+        this.nombre = nombre;
+        this.precio = precio;
+        this.tipoPlato = tipoPlato;
+        this.menu = menu;
+    }
 }

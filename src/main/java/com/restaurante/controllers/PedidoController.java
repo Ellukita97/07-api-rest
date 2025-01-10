@@ -9,8 +9,8 @@ import com.restaurante.services.ClienteServices;
 import com.restaurante.services.PedidoServices;
 import com.restaurante.services.PlatoServices;
 import com.restaurante.utils.Converters.PedidoDTOConvertidor;
-import com.restaurante.utils.chainofresponsibility.Cliente.EjecutarClienteHandlerChainResponsability;
-import com.restaurante.utils.chainofresponsibility.Plato.EjecutarPlatoHandlerChainResponsability;
+import com.restaurante.patronesDeDisenio.chainofresponsibility.Cliente.EjecutarClienteHandlerChainResponsability;
+import com.restaurante.patronesDeDisenio.chainofresponsibility.Plato.EjecutarPlatoHandlerChainResponsability;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -40,7 +40,7 @@ public class PedidoController {
     }
 
     @PostMapping
-    public ResponseEntity<ResponderPedidosDTO> agregarPedidos(@RequestBody RecibirPedidosDTO pedidoRecibido) {
+    public ResponderPedidosDTO agregarPedidos(@RequestBody RecibirPedidosDTO pedidoRecibido) {
 
         Pedido pedido = PedidoDTOConvertidor.convertirAEntidad(pedidoRecibido);
         Optional<Cliente> clienteOptional = clienteServices.obtenerCliente(pedidoRecibido.getIdCliente());
@@ -49,8 +49,7 @@ public class PedidoController {
         ejecutarClienteHandlerChainResponsability.Ejecutar(clienteOptional.get());
 
         servicesPedido.agregarPedido(pedido, pedidoRecibido.getIdCliente());
-        ResponderPedidosDTO respuestaDTO = PedidoDTOConvertidor.convertirDTO(pedido);
-        return ResponseEntity.ok(respuestaDTO);
+        return PedidoDTOConvertidor.convertirDTO(pedido);
     }
 
     @GetMapping("/{id}")

@@ -1,4 +1,4 @@
-package com.restaurante.utils.chainofresponsibility.Plato;
+package com.restaurante.patronesDeDisenio.chainofresponsibility.Plato;
 
 import com.restaurante.models.Plato;
 import com.restaurante.services.PedidoServices;

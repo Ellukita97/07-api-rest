@@ -20,8 +20,8 @@ public class MenuServices {
         this.repositorio = repositorio;
     }
 
-    public void agregarMenu(Menu menu) {
-        repositorio.save(menu);
+    public Menu agregarMenu(Menu menu) {
+        return repositorio.save(menu);
     }
 
     public Optional<Menu> obtenerMenu(Long id) {

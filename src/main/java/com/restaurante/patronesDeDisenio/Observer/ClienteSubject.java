@@ -1,4 +1,4 @@
-package com.restaurante.utils.Observer;
+package com.restaurante.patronesDeDisenio.Observer;
 
 import lombok.Getter;
 

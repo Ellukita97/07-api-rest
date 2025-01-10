@@ -1,10 +1,10 @@
-package com.restaurante.utils.chainofresponsibility.Cliente;
+package com.restaurante.patronesDeDisenio.chainofresponsibility.Cliente;
 
 import com.restaurante.constantes.TipoCliente;
 import com.restaurante.models.Cliente;
 import com.restaurante.services.ClienteServices;
 import com.restaurante.services.PedidoServices;
-import com.restaurante.utils.Observer.EjecutarObserver;
+import com.restaurante.patronesDeDisenio.Observer.EjecutarObserver;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class ManejadorConcreto1 extends ClienteHandlerChainResponsability {

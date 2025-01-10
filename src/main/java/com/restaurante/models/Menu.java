@@ -24,4 +24,11 @@ public class Menu {
     @OneToMany(mappedBy = "menu")
     private List<Plato> platos = new ArrayList<>();
 
+    public Menu() {
+    }
+
+    public Menu(Long id, String nombre) {
+        this.id = id;
+        this.nombre = nombre;
+    }
 }
