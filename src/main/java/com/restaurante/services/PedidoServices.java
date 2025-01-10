@@ -41,10 +41,10 @@ public class PedidoServices {
 
     public List<ResponderPedidosDTO> listarPedido() {
         return repositorioPedido.findAll().stream()
-                .map(plato -> new ResponderPedidosDTO(
-                        plato.getId(),
-                        plato.getPrecio(),
-                        plato.getCliente().getId()
+                .map(pedido -> new ResponderPedidosDTO(
+                        pedido.getId(),
+                        pedido.getPrecio(),
+                        pedido.getCliente().getId()
                 ))
                 .collect(Collectors.toList());
     }
