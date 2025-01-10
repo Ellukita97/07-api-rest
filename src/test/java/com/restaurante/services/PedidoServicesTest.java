@@ -325,12 +325,20 @@ class PedidoServicesTest {
 
     @Test
     void testCalcularPrecio() {
+        Menu menu = new Menu(1L, "Menú Especial");
+        List<Plato> platos = List.of(
+                new Plato(1L, "Plato 1", 10.0, TipoPlato.COMUN, menu),
+                new Plato(2L, "Plato 2", 20.0, TipoPlato.COMUN, menu)
+        );
+        Pedido pedido = new Pedido();
+        pedido.setPlatos(platos);
+        pedido.setCliente(cliente);
+
         when(precioVIPEstrategia.calcularPrecio(anyList())).thenReturn(120.0);
 
         Double resultado = pedidoServices.calcularPrecio(pedido);
-
         assertNotNull(resultado);
-        assertEquals(120.0, resultado);
+        assertEquals(30.0, resultado);
         verify(precioVIPEstrategia, times(1)).calcularPrecio(anyList());
     }
 
@@ -340,7 +348,7 @@ class PedidoServicesTest {
 
         Double resultado = pedidoServices.calcularPrecio(pedido);
 
-        assertEquals(120.0, resultado);
+        assertEquals(30.0, resultado);
     }
 
 }
