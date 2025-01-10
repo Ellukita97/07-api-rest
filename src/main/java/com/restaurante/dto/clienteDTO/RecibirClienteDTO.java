@@ -11,4 +11,6 @@ public class RecibirClienteDTO {
     private String email;
     private String telefono;
 
+    public RecibirClienteDTO() {
+    }
 }

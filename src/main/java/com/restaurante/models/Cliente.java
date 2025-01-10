@@ -25,4 +25,14 @@ public class Cliente {
     @Enumerated(EnumType.STRING)  // Almacena el nombre del enum como texto
     private TipoCliente tipoCliente;
 
+    public Cliente() {
+    }
+
+    public Cliente(Long id, String nombre, String email, String telefono, TipoCliente tipoCliente) {
+        this.id = id;
+        this.nombre = nombre;
+        this.email = email;
+        this.telefono = telefono;
+        this.tipoCliente = tipoCliente;
+    }
 }

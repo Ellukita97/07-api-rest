@@ -14,4 +14,6 @@ public class ResponderClienteDTO {
         private String telefono;
         private TipoCliente tipoCliente;
 
+        public ResponderClienteDTO() {
+        }
 }

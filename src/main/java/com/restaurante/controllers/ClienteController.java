@@ -30,11 +30,9 @@ public class ClienteController {
     }
 
     @PostMapping
-    public ResponseEntity<ResponderClienteDTO> agregarCliente(@RequestBody RecibirClienteDTO clienteRecibido) {
+    public ResponderClienteDTO agregarCliente(@RequestBody RecibirClienteDTO clienteRecibido) {
         Cliente cliente = ClienteDTOConvertidor.convertirAEntidad(clienteRecibido);
-        clienteServices.agregarCliente(cliente);
-        ResponderClienteDTO respuestaDTO = ClienteDTOConvertidor.convertirDTO(cliente);
-        return ResponseEntity.ok(respuestaDTO);
+        return ClienteDTOConvertidor.convertirDTO(clienteServices.agregarCliente(cliente));
     }
 
     @GetMapping("/{id}")

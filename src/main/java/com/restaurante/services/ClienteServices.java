@@ -21,9 +21,9 @@ public class ClienteServices {
         this.repositorio = repositorio;
     }
 
-    public void agregarCliente(Cliente cliente) {
+    public Cliente agregarCliente(Cliente cliente) {
         cliente.setTipoCliente(TipoCliente.COMUN);
-        repositorio.save(cliente);
+        return repositorio.save(cliente);
     }
 
     public Optional<Cliente> obtenerCliente(Long id) {

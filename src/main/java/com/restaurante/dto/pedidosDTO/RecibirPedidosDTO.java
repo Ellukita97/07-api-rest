@@ -10,4 +10,6 @@ public class RecibirPedidosDTO {
     private Double precio;
     private Long idCliente;
 
+    public RecibirPedidosDTO() {
+    }
 }

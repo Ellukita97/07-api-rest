@@ -9,4 +9,6 @@ public class RecibirMenuDTO {
 
     private String nombre;
 
+    public RecibirMenuDTO() {
+    }
 }

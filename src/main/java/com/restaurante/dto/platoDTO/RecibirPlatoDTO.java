@@ -11,4 +11,7 @@ public class RecibirPlatoDTO {
     private Long idMenu;
     private Double precio;
 
+    public RecibirPlatoDTO() {
+    }
+
 }
