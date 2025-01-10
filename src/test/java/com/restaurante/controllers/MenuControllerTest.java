@@ -1,7 +1,9 @@
 package com.restaurante.controllers;
 
+import com.restaurante.constantes.TipoCliente;
 import com.restaurante.dto.menuDTO.RecibirMenuDTO;
 import com.restaurante.dto.menuDTO.ResponderMenuDTO;
+import com.restaurante.models.Cliente;
 import com.restaurante.models.Menu;
 import com.restaurante.services.MenuServices;
 import com.restaurante.utils.Converters.MenuDTOConvertidor;
@@ -10,6 +12,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.reactive.server.WebTestClient;
+import reactor.core.publisher.Mono;
 
 import java.util.List;
 import java.util.Optional;
@@ -120,6 +123,23 @@ class MenuControllerTest {
                 .value(response -> assertEquals("Se ha actualizado exitosamente el menu", response));
 
         Mockito.verify(menuServices).actualizarMenu(anyLong(), any(Menu.class));
+    }
+
+    @Test
+    void testActualizarMenuNotFound() {
+        Long menuIdInexistente = 999L;
+
+        Menu menu = new Menu(1L, "Menú Especial");
+
+        when(menuServices.actualizarMenu(menuIdInexistente, menu))
+                .thenThrow(new RuntimeException("Menu no encontrado"));
+
+        webTestClient.put()
+                .uri("/menus/{id}", menuIdInexistente)
+                .body(Mono.just(menu), Menu.class)
+                .exchange()
+                .expectStatus().isNotFound()
+                .expectBody(String.class);
     }
 
     @Test

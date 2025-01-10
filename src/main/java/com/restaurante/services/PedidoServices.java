@@ -4,6 +4,8 @@ import com.restaurante.constantes.TipoCliente;
 import com.restaurante.dto.pedidosDTO.ResponderPedidosDTO;
 import com.restaurante.models.Cliente;
 import com.restaurante.models.Pedido;
+import com.restaurante.patronesDeDisenio.strategy.PrecioRegularEstrategia;
+import com.restaurante.patronesDeDisenio.strategy.PrecioVIPEstrategia;
 import com.restaurante.repositories.ClienteRepositorio;
 import com.restaurante.repositories.PedidoRepositorio;
 import com.restaurante.repositories.PlatoRepositorio;
@@ -20,18 +22,11 @@ import java.util.stream.Collectors;
 public class PedidoServices {
     private final PedidoRepositorio repositorioPedido;
     private final ClienteRepositorio repositorioCliente;
-    private final PlatoRepositorio repositorioPlato;
 
     @Autowired
-    private PrecioEstrategia precioRegularEstrategia;
-    @Autowired
-    private PrecioEstrategia precioVIPEstrategia;
-
-    @Autowired
-    public PedidoServices(PedidoRepositorio repositorioPedido, ClienteRepositorio repositorioCliente, PlatoRepositorio repositorioPlato) {
+    public PedidoServices(PedidoRepositorio repositorioPedido, ClienteRepositorio repositorioCliente) {
         this.repositorioPedido = repositorioPedido;
         this.repositorioCliente = repositorioCliente;
-        this.repositorioPlato = repositorioPlato;
     }
 
     public Pedido agregarPedido(Pedido pedido, Long idCliente) {
@@ -106,9 +101,9 @@ public class PedidoServices {
     private PrecioEstrategia obtenerEstrategiaPorTipoCliente(TipoCliente tipoCliente) {
         switch (tipoCliente) {
             case FRECUENTE:
-                return precioVIPEstrategia;
+                return new PrecioVIPEstrategia();
             default:
-                return precioRegularEstrategia;
+                return new PrecioRegularEstrategia();
         }
     }
 

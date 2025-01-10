@@ -17,7 +17,9 @@ import org.mockito.Mockito;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.reactive.server.WebTestClient;
+import reactor.core.publisher.Mono;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -74,10 +76,6 @@ class PedidoControllerTest {
 
         Mockito.verify(servicesPedido).agregarPedido(any(Pedido.class), anyLong());
     }
-
-
-
-    /*-------------------------------*/
 
     @Test
     @DisplayName("Obtener pedido por id")
@@ -152,6 +150,24 @@ class PedidoControllerTest {
     }
 
     @Test
+    void testActualizarPedidoNotFound() {
+        Long pedidoIdInexistente = 999L;
+
+        Cliente cliente = new Cliente(1L, "Juan", "juan@juan.com", "082383823", TipoCliente.COMUN);
+        Pedido pedido = new Pedido(1L, 100.0, cliente);
+
+        when(servicesPedido.actualizarPedido(pedidoIdInexistente, pedido))
+                .thenThrow(new RuntimeException("Pedido no encontrado"));
+
+        webTestClient.put()
+                .uri("/pedidos/{id}", pedidoIdInexistente)
+                .body(Mono.just(pedido), Pedido.class)
+                .exchange()
+                .expectStatus().isNotFound()
+                .expectBody(String.class);
+    }
+
+    @Test
     @DisplayName("Eliminar pedido")
     void eliminarPedido() {
 
@@ -188,7 +204,19 @@ class PedidoControllerTest {
         verify(servicesPedido).obtenerPedidosPorCliente(anyLong());
     }
 
-    /*--------------------------------------------------*/
+    @Test
+    void testObtenerPedidosPorClienteNotFound() {
+        Long clienteIdInexistente = 999L;
+
+        when(servicesPedido.obtenerPedidosPorCliente(clienteIdInexistente))
+                .thenThrow(new RuntimeException("Cliente no tiene pedidos"));
+
+        webTestClient.get()
+                .uri("/cliente/{clienteId}", clienteIdInexistente)
+                .exchange()
+                .expectStatus().isNotFound()
+                .expectBody().isEmpty();
+    }
 
     @Test
     @DisplayName("Añadir platos a pedido")
@@ -216,6 +244,22 @@ class PedidoControllerTest {
                 });
 
         verify(servicesPedido).agregarPedido(any(Pedido.class), anyLong());
+    }
+
+    @Test
+    void testAddPlatosToPedidoEmptyPlatos() {
+        Long pedidoId = 1L;
+        List<Long> platosIds = List.of(1L, 2L, 3L);
+
+        when(servicesPlato.obtenerTodosPlatoPorId(platosIds))
+                .thenReturn(List.of());
+
+        webTestClient.post()
+                .uri("/api/pedido/{pedidoId}/platos", pedidoId)
+                .bodyValue(platosIds)
+                .exchange()
+                .expectStatus().isBadRequest()
+                .expectBody().isEmpty();
     }
 
     @Test

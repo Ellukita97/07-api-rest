@@ -16,14 +16,6 @@ public class PedidoDTOConvertidor {
         return dto;
     }
 
-    public static ResponderPedidosDTO convertirDTO(Optional<Pedido> pedido) {
-        ResponderPedidosDTO dto = new ResponderPedidosDTO();
-
-        dto.setId(pedido.get().getId());
-        dto.setPrecio(pedido.get().getPrecio());
-        dto.setIdCliente(pedido.get().getCliente().getId());
-        return dto;
-    }
 
     public static Pedido convertirAEntidad(RecibirPedidosDTO dto) {
         Pedido pedido = new Pedido();

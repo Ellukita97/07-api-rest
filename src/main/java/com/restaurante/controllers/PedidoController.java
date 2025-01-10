@@ -67,7 +67,7 @@ public class PedidoController {
     @PutMapping("/{id}")
     public ResponseEntity<String> actualizarPedido(@PathVariable Long id, @RequestBody Pedido pedido) {
         try {
-            Pedido pedidoActualizado = servicesPedido.actualizarPedido(id, pedido);
+            servicesPedido.actualizarPedido(id, pedido);
             return ResponseEntity.ok("Se ha actualizado exitosamente el pedido");
         } catch (RuntimeException e) {
             return ResponseEntity.notFound().build();

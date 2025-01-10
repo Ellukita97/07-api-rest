@@ -62,7 +62,7 @@ public class PlatoController {
     @PutMapping("/{id}")
     public ResponseEntity<String> actualizarPlato(@PathVariable Long id, @RequestBody Plato plato) {
         try {
-            Plato platoActualizado = servicesPlato.actualizarPlato(id, plato);
+            servicesPlato.actualizarPlato(id, plato);
             return ResponseEntity.ok("Se ha actualizado exitosamente el plato");
         } catch (RuntimeException e) {
             return ResponseEntity.notFound().build();

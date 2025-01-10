@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.reactive.server.WebTestClient;
+import reactor.core.publisher.Mono;
 
 import java.util.List;
 import java.util.Optional;
@@ -126,6 +127,23 @@ class ClienteControllerTest {
                 .value(response -> assertEquals("Se ha actualizado exitosamente el cliente", response));
 
         Mockito.verify(clienteServices).actualizarCliente(anyLong(), any(Cliente.class));
+    }
+
+    @Test
+    void testActualizarClienteNotFound() {
+        Long clienteIdInexistente = 999L;
+
+        Cliente cliente = new Cliente(1L, "Juan", "juan@juan.com","082383823", TipoCliente.COMUN);
+
+        when(clienteServices.actualizarCliente(clienteIdInexistente, cliente))
+                .thenThrow(new RuntimeException("Cliente no encontrado"));
+
+        webTestClient.put()
+                .uri("/clientes/{id}", clienteIdInexistente)
+                .body(Mono.just(cliente), Cliente.class)
+                .exchange()
+                .expectStatus().isNotFound()
+                .expectBody(String.class);
     }
 
     @Test

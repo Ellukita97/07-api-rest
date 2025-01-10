@@ -53,7 +53,7 @@ public class MenuController {
     @PutMapping("/{id}")
     public ResponseEntity<String> actualizarMenu(@PathVariable Long id, @RequestBody Menu menu) {
         try {
-            Menu menuActualizado = services.actualizarMenu(id, menu);
+            services.actualizarMenu(id, menu);
             return ResponseEntity.ok("Se ha actualizado exitosamente el menu");
         } catch (RuntimeException e) {
             return ResponseEntity.notFound().build();
