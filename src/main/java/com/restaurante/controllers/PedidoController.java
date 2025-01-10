@@ -66,12 +66,8 @@ public class PedidoController {
 
     @PutMapping("/{id}")
     public ResponseEntity<String> actualizarPedido(@PathVariable Long id, @RequestBody Pedido pedido) {
-        try {
-            servicesPedido.actualizarPedido(id, pedido);
-            return ResponseEntity.ok("Se ha actualizado exitosamente el pedido");
-        } catch (RuntimeException e) {
-            return ResponseEntity.notFound().build();
-        }
+        servicesPedido.actualizarPedido(id, pedido);
+        return ResponseEntity.ok("Se ha actualizado exitosamente el pedido");
     }
 
     @DeleteMapping("/{id}")
@@ -82,12 +78,8 @@ public class PedidoController {
 
     @GetMapping("/cliente/{clienteId}")
     public ResponseEntity<List<Pedido>> obtenerPedidosPorCliente(@PathVariable Long clienteId) {
-        try {
-            List<Pedido> pedidos = servicesPedido.obtenerPedidosPorCliente(clienteId);
-            return ResponseEntity.ok(pedidos);
-        } catch (Exception e) {
-            return ResponseEntity.notFound().build();
-        }
+        List<Pedido> pedidos = servicesPedido.obtenerPedidosPorCliente(clienteId);
+        return ResponseEntity.ok(pedidos);
     }
 
     @PostMapping("/{pedidoId}/platos")

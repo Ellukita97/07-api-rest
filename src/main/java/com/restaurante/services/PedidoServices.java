@@ -31,9 +31,6 @@ public class PedidoServices {
 
     public Pedido agregarPedido(Pedido pedido, Long idCliente) {
         Optional<Cliente> clienteOpt = repositorioCliente.findById(idCliente);
-        if (!clienteOpt.isPresent()) {
-            throw new RuntimeException("Cliente no encontrado.");
-        }
         pedido.setCliente(clienteOpt.get());
         return repositorioPedido.save(pedido);
     }
@@ -78,10 +75,6 @@ public class PedidoServices {
     public void aplicarDescuentoATodosLosPedidosDeCliente(Long clienteId) {
         List<Pedido> pedidos = repositorioPedido.findByClienteId(clienteId);
 
-        if (pedidos.isEmpty()) {
-            throw new RuntimeException("El cliente no tiene pedidos registrados.");
-        }
-
         for (Pedido pedido : pedidos) {
             double nuevoPrecio = pedido.getPrecio() * (1 - 0.0238);
             pedido.setPrecio(nuevoPrecio);
@@ -98,7 +91,7 @@ public class PedidoServices {
         return estrategia.calcularPrecio(pedido.getPlatos());
     }
 
-    private PrecioEstrategia obtenerEstrategiaPorTipoCliente(TipoCliente tipoCliente) {
+    PrecioEstrategia obtenerEstrategiaPorTipoCliente(TipoCliente tipoCliente) {
         switch (tipoCliente) {
             case FRECUENTE:
                 return new PrecioVIPEstrategia();

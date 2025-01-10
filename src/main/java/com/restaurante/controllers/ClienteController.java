@@ -49,12 +49,8 @@ public class ClienteController {
 
     @PutMapping("/{id}")
     public ResponseEntity<String> actualizarCliente(@PathVariable Long id, @RequestBody Cliente cliente) {
-        try {
-            Cliente clienteActualizado = clienteServices.actualizarCliente(id, cliente);
-            return ResponseEntity.ok("Se ha actualizado exitosamente el cliente");
-        } catch (RuntimeException e) {
-            return ResponseEntity.notFound().build();
-        }
+        clienteServices.actualizarCliente(id, cliente);
+        return ResponseEntity.ok("Se ha actualizado exitosamente el cliente");
     }
 
     @DeleteMapping("/{id}")

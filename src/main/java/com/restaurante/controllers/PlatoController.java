@@ -36,9 +36,6 @@ public class PlatoController {
     @PostMapping
     public ResponseEntity<ResponderPlatoDTO> agregarPlato(@RequestBody RecibirPlatoDTO platoRecibido) {
         Optional<Menu> menuOpcional = servicesMenu.obtenerMenu(platoRecibido.getIdMenu());
-        if (!menuOpcional.isPresent()) {
-            return ResponseEntity.notFound().build();
-        }
 
         Plato plato = PlatoDTOConvertidor.convertirAEntidad(platoRecibido);
         plato.setMenu(menuOpcional.get());
@@ -61,12 +58,8 @@ public class PlatoController {
 
     @PutMapping("/{id}")
     public ResponseEntity<String> actualizarPlato(@PathVariable Long id, @RequestBody Plato plato) {
-        try {
-            servicesPlato.actualizarPlato(id, plato);
-            return ResponseEntity.ok("Se ha actualizado exitosamente el plato");
-        } catch (RuntimeException e) {
-            return ResponseEntity.notFound().build();
-        }
+        servicesPlato.actualizarPlato(id, plato);
+        return ResponseEntity.ok("Se ha actualizado exitosamente el plato");
     }
 
     @DeleteMapping("/{id}")

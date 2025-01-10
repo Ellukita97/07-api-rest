@@ -9,6 +9,8 @@ import com.restaurante.models.Menu;
 import com.restaurante.models.Pedido;
 import com.restaurante.models.Plato;
 import com.restaurante.patronesDeDisenio.strategy.PrecioEstrategia;
+import com.restaurante.patronesDeDisenio.strategy.PrecioRegularEstrategia;
+import com.restaurante.patronesDeDisenio.strategy.PrecioVIPEstrategia;
 import com.restaurante.repositories.ClienteRepositorio;
 import com.restaurante.repositories.PedidoRepositorio;
 import com.restaurante.repositories.PlatoRepositorio;
@@ -266,6 +268,60 @@ class PedidoServicesTest {
         assertEquals(0L, resultado);
         verify(repositorioPedido, times(1)).countByClienteId(clienteIdInexistente);
     }
+
+    @Test
+    void testObtenerEstrategiaPorTipoClienteFrecuente() {
+        TipoCliente tipoCliente = TipoCliente.FRECUENTE;
+
+        PrecioEstrategia estrategia = pedidoServices.obtenerEstrategiaPorTipoCliente(tipoCliente);
+        assertTrue(estrategia instanceof PrecioVIPEstrategia);
+        Menu menu = new Menu(1L, "Menú Especial");
+
+        List<Plato> platos = List.of(
+                new Plato(1L, "Plato 1", 30.0, TipoPlato.COMUN, menu),
+                new Plato(1L, "Plato 1", 30.0, TipoPlato.COMUN, menu)
+        );
+
+        double precioCalculado = estrategia.calcularPrecio(platos);
+        assertEquals(54.0, precioCalculado, 0.01);
+    }
+
+    @Test
+    void testObtenerEstrategiaPorTipoClienteRegular() {
+        TipoCliente tipoCliente = TipoCliente.COMUN;
+
+        PrecioEstrategia estrategia = pedidoServices.obtenerEstrategiaPorTipoCliente(tipoCliente);
+        assertTrue(estrategia instanceof PrecioRegularEstrategia);
+        Menu menu = new Menu(1L, "Menú Especial");
+
+        List<Plato> platos = List.of(
+                new Plato(1L, "Plato 1", 30.0, TipoPlato.COMUN, menu),
+                new Plato(1L, "Plato 1", 30.0, TipoPlato.COMUN, menu)
+        );
+
+        double precioCalculado = estrategia.calcularPrecio(platos);
+        assertEquals(60, precioCalculado, 0.01);
+    }
+
+    @Test
+    void testVerificarPlatoMasDe100Veces_CuandoSeSuperanLas3Veces() {
+        Long platoId = 1L;
+        when(repositorioPedido.contarVecesQuePlatoFuePedido(platoId)).thenReturn(4L);
+        boolean resultado = pedidoServices.verificarPlatoMasDe100Veces(platoId);
+        assertTrue(resultado);
+        verify(repositorioPedido, times(1)).contarVecesQuePlatoFuePedido(platoId);
+    }
+
+
+    @Test
+    void testVerificarPlatoMasDe100Veces_CuandoNoHayPedidos() {
+        Long platoId = 1L;
+        when(repositorioPedido.contarVecesQuePlatoFuePedido(platoId)).thenReturn(0L);
+        boolean resultado = pedidoServices.verificarPlatoMasDe100Veces(platoId);
+        assertFalse(resultado);
+        verify(repositorioPedido, times(1)).contarVecesQuePlatoFuePedido(platoId);
+    }
+
 
     @Test
     void testCalcularPrecio() {

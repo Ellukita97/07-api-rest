@@ -131,7 +131,7 @@ class ClienteControllerTest {
 
     @Test
     void testActualizarClienteNotFound() {
-        Long clienteIdInexistente = 999L;
+        Long clienteIdInexistente = -999L;
 
         Cliente cliente = new Cliente(1L, "Juan", "juan@juan.com","082383823", TipoCliente.COMUN);
 
