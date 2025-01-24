@@ -32,7 +32,8 @@ public class MenuServices {
         return repositorio.findAll().stream()
                 .map(plato -> new ResponderMenuDTO(
                         plato.getId(),
-                        plato.getNombre()
+                        plato.getNombre(),
+                        plato.getUrlImage()
                 ))
                 .collect(Collectors.toList());
     }

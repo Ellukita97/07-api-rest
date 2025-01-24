@@ -36,7 +36,7 @@ class MenuControllerTest {
     @DisplayName("Crear menu")
     void agregarMenu() {
 
-        RecibirMenuDTO menuRecibido = new RecibirMenuDTO("Menú Especial");
+        RecibirMenuDTO menuRecibido = new RecibirMenuDTO("Menú Especial","");
         Menu menu = MenuDTOConvertidor.convertirAEntidad(menuRecibido);
         ResponderMenuDTO respuestaDTO = MenuDTOConvertidor.convertirDTO(menu);
 
@@ -60,7 +60,7 @@ class MenuControllerTest {
     @DisplayName("Obtener menu por id")
     void obtenerMenuPorId() {
 
-        Menu menu = new Menu(1L, "Menú Especial");
+        Menu menu = new Menu(1L, "Menú Especial","");
         ResponderMenuDTO respuestaDTO = MenuDTOConvertidor.convertirDTO(menu);
 
         when(menuServices.obtenerMenu(anyLong())).thenReturn(Optional.of(menu));
@@ -81,9 +81,9 @@ class MenuControllerTest {
     void listarMenus() {
 
         List<ResponderMenuDTO> menus = List.of(
-                new ResponderMenuDTO(1L, "Menú Especial"),
-                new ResponderMenuDTO(2L, "Menú Vegano"),
-                new ResponderMenuDTO(3L, "Menú Infantil")
+                new ResponderMenuDTO(1L, "Menú Especial",""),
+                new ResponderMenuDTO(2L, "Menú Vegano",""),
+                new ResponderMenuDTO(3L, "Menú Infantil","")
         );
 
         when(menuServices.listarMenu()).thenReturn(menus);
@@ -108,7 +108,7 @@ class MenuControllerTest {
     @DisplayName("Actualizar menu")
     void actualizarMenu() {
 
-        Menu menu = new Menu(1L, "Menú Especial");
+        Menu menu = new Menu(1L, "Menú Especial","");
         when(menuServices.actualizarMenu(anyLong(), any(Menu.class))).thenReturn(menu);
 
         webTestClient.put()
@@ -127,7 +127,7 @@ class MenuControllerTest {
     void testActualizarMenuNotFound() {
         Long menuIdInexistente = 999L;
 
-        Menu menu = new Menu(1L, "Menú Especial");
+        Menu menu = new Menu(1L, "Menú Especial","");
 
         when(menuServices.actualizarMenu(menuIdInexistente, menu))
                 .thenThrow(new RuntimeException("Menu no encontrado"));

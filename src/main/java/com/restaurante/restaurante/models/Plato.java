@@ -22,6 +22,7 @@ public class Plato {
     private Long id;
     private String nombre;
     private Double precio;
+    private String urlImage;
 
     @Enumerated(EnumType.STRING)
     private TipoPlato tipoPlato;
@@ -33,10 +34,11 @@ public class Plato {
     public Plato() {
     }
 
-    public Plato(Long id, String nombre, Double precio, TipoPlato tipoPlato, Menu menu) {
+    public Plato(Long id, String nombre, Double precio, String urlImage, TipoPlato tipoPlato, Menu menu) {
         this.id = id;
         this.nombre = nombre;
         this.precio = precio;
+        this.urlImage = urlImage;
         this.tipoPlato = tipoPlato;
         this.menu = menu;
     }

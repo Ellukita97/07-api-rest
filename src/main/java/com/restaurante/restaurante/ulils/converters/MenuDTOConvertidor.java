@@ -14,6 +14,7 @@ public class MenuDTOConvertidor {
 
         dto.setId(menu.getId());
         dto.setNombre(menu.getNombre());
+        dto.setUrlImage(menu.getUrlImage());
         return dto;
     }
     public static ResponderMenuDTO convertirDTO(Optional<Menu> menu){
@@ -21,12 +22,14 @@ public class MenuDTOConvertidor {
 
         dto.setId(menu.get().getId());
         dto.setNombre(menu.get().getNombre());
+        dto.setUrlImage(menu.get().getUrlImage());
         return dto;
     }
     public static Menu convertirAEntidad(RecibirMenuDTO dto){
         Menu menu = new Menu();
 
         menu.setNombre(dto.getNombre());
+        menu.setUrlImage(dto.getUrlImage());
         return menu;
     }
 }

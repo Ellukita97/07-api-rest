@@ -45,11 +45,11 @@ class PlatoServicesTest {
     void setUp() {
         MockitoAnnotations.openMocks(this);
 
-        plato1 = new Plato(1L, "Plato 1", 10.0, TipoPlato.COMUN, new Menu());
-        plato2 = new Plato(2L, "Plato 2", 15.0, TipoPlato.POPULAR, new Menu());
-        plato = new Plato(1L, "Plato 1", 15.0, TipoPlato.COMUN, new Menu());
-        platoActualizado = new Plato(1L, "Plato Actualizado", 20.0, TipoPlato.COMUN, new Menu());
-        responderPlatoDTO = new ResponderPlatoDTO(plato.getId(), plato.getNombre(), plato.getPrecio(), plato.getTipoPlato(), plato.getMenu().getId());
+        plato1 = new Plato(1L, "Plato 1", 10.0,"", TipoPlato.COMUN, new Menu());
+        plato2 = new Plato(2L, "Plato 2", 15.0,"", TipoPlato.POPULAR, new Menu());
+        plato = new Plato(1L, "Plato 1", 15.0,"", TipoPlato.COMUN, new Menu());
+        platoActualizado = new Plato(1L, "Plato Actualizado", 20.0,"", TipoPlato.COMUN, new Menu());
+        responderPlatoDTO = new ResponderPlatoDTO(plato.getId(), plato.getNombre(), plato.getPrecio(), plato.getTipoPlato(), plato.getMenu().getId(),"");
     }
 
     @Test

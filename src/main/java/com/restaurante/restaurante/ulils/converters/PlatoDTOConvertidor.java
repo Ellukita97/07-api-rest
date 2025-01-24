@@ -16,6 +16,7 @@ public class PlatoDTOConvertidor {
         dto.setNombre(plato.getNombre());
         dto.setPrecio(plato.getPrecio());
         dto.setTipoPlato(plato.getTipoPlato());
+        dto.setUrlImage(plato.getUrlImage());
         return dto;
     }
     public static ResponderPlatoDTO convertirDTO(Optional<Plato> plato){
@@ -25,6 +26,7 @@ public class PlatoDTOConvertidor {
         dto.setNombre(plato.get().getNombre());
         dto.setPrecio(plato.get().getPrecio());
         dto.setTipoPlato(plato.get().getTipoPlato());
+        dto.setUrlImage(plato.get().getUrlImage());
         return dto;
     }
     public static Plato convertirAEntidad(RecibirPlatoDTO dto){
@@ -32,6 +34,7 @@ public class PlatoDTOConvertidor {
 
         plato.setNombre(dto.getNombre());
         plato.setPrecio(dto.getPrecio());
+        plato.setUrlImage(dto.getUrlImage());
         return plato;
     }
 }

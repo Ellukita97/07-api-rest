@@ -20,6 +20,7 @@ public class Menu {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nombre;
+    private String urlImage;
 
     @OneToMany(mappedBy = "menu")
     private List<Plato> platos = new ArrayList<>();
@@ -27,8 +28,9 @@ public class Menu {
     public Menu() {
     }
 
-    public Menu(Long id, String nombre) {
+    public Menu(Long id, String nombre, String urlImage) {
         this.id = id;
         this.nombre = nombre;
+        this.urlImage = urlImage;
     }
 }

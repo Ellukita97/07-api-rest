@@ -40,7 +40,8 @@ public class PlatoServices {
                         plato.getNombre(),
                         plato.getPrecio(),
                         plato.getTipoPlato(),
-                        plato.getMenu().getId()
+                        plato.getMenu().getId(),
+                        plato.getUrlImage()
                 ))
                 .collect(Collectors.toList());
     }

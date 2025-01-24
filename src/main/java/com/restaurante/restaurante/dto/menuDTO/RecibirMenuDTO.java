@@ -8,11 +8,13 @@ import lombok.Setter;
 public class RecibirMenuDTO {
 
     private String nombre;
+    private String urlImage;
 
     public RecibirMenuDTO() {
     }
 
-    public RecibirMenuDTO(String nombre) {
+    public RecibirMenuDTO(String nombre, String urlImage) {
         this.nombre = nombre;
+        this.urlImage = urlImage;
     }
 }

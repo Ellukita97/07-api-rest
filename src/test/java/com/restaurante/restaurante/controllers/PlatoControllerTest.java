@@ -39,10 +39,10 @@ class PlatoControllerTest {
     @Test
     @DisplayName("Crear plato")
     void agregarPlato() {
-        RecibirPlatoDTO platoRecibido = new RecibirPlatoDTO("Plato 1", 1L, 30.0);
+        RecibirPlatoDTO platoRecibido = new RecibirPlatoDTO("",30.0, 1L, "Plato 1");
 
-        Menu menu = new Menu(1L, "Menú Especial");
-        Plato plato = new Plato(1L, "Plato 1", 30.0, TipoPlato.COMUN, menu);
+        Menu menu = new Menu(1L, "Menú Especial","");
+        Plato plato = new Plato(1L, "Plato 1", 30.0,"", TipoPlato.COMUN, menu);
 
         when(menuServices.obtenerMenu(anyLong())).thenReturn(Optional.of(menu));
         when(platoServices.agregarPlato(any(Plato.class))).thenReturn(plato);
@@ -71,8 +71,8 @@ class PlatoControllerTest {
     @Test
     @DisplayName("Obtener plato por id")
     void obtenerPlatoPorId() {
-        Menu menu = new Menu(1L, "Menú Especial");
-        Plato plato = new Plato(1L, "Plato 1", 30.0, TipoPlato.COMUN, menu);
+        Menu menu = new Menu(1L, "Menú Especial","");
+        Plato plato = new Plato(1L, "Plato 1", 30.0,"", TipoPlato.COMUN, menu);
 
         when(platoServices.obtenerPlato(anyLong())).thenReturn(Optional.of(plato));
 
@@ -97,11 +97,11 @@ class PlatoControllerTest {
     @DisplayName("Listar todos los platos")
     void listarPlato() {
 
-        Menu menu = new Menu(1L, "Menú Especial");
+        Menu menu = new Menu(1L, "Menú Especial","");
 
         List<ResponderPlatoDTO> platos = List.of(
-                new ResponderPlatoDTO(1L, "Plato 1", 10.0, TipoPlato.COMUN, 1L),
-                new ResponderPlatoDTO(2L, "Plato 2", 20.0, TipoPlato.COMUN, 1L)
+                new ResponderPlatoDTO(1L, "Plato 1", 10.0, TipoPlato.COMUN, 1L,""),
+                new ResponderPlatoDTO(2L, "Plato 2", 20.0, TipoPlato.COMUN, 1L,"")
         );
 
         when(platoServices.listarPlato()).thenReturn(platos);
@@ -124,8 +124,8 @@ class PlatoControllerTest {
     @Test
     @DisplayName("Actualizar plato")
     void actualizarPlato() {
-        Menu menu = new Menu(1L, "Menú Especial");
-        Plato plato = new Plato(1L, "Plato 1", 30.0, TipoPlato.COMUN, menu);
+        Menu menu = new Menu(1L, "Menú Especial","");
+        Plato plato = new Plato(1L, "Plato 1", 30.0,"", TipoPlato.COMUN, menu);
 
         when(platoServices.actualizarPlato(anyLong(), any(Plato.class))).thenReturn(plato);
 
